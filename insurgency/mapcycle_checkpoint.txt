@@ -1,0 +1,27 @@
+buhriz_coop checkpoint
+district_coop checkpoint
+embassy_coop checkpoint
+heights_coop checkpoint
+market_coop checkpoint
+ministry_coop checkpoint
+revolt_coop checkpoint
+siege_coop checkpoint
+sinjar_coop checkpoint
+tell_coop checkpoint
+verticality_coop checkpoint
+almaden_coop_v1_1
+badlands_b1
+baghdad_coop_b5
+gizab_b1_coop
+cs_downtown_coop
+cs_officeb3_coop_v1_5
+szepezd_b3_coopv1_2
+shellshock
+ins_chinatown
+docks_coopb2_day
+warehouse_coopv3b4
+de_vertigo_coop checkpoint
+cs_motel_coop_nd_v1_3
+osama_b3_checkpoint
+de_vertigo_coop
+dust2_checkpoint

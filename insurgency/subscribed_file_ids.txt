@@ -1,0 +1,21 @@
+859127166 // The Armory: Expanded - 35 Angry Bots
+1093292666 // baghdad_coop_b5
+383525894 // khanashin_b8 checkpoint
+650616844 // estates_b4
+573278223 // panama_canal_b2
+532461305 // badlands_b1
+1207457291 // cs_italy_coop checkpoint
+605055192 // crossbow checkpoint
+616494611 // bridge_coop_optimized_v1
+346843105 // the_burbs_coop
+292080383 // jail_break_coop_ws
+1083704311 // almaden_coop_v1_1
+447480972 // gizab_b1
+1568832749 // cs_downtown_coop checkpoint
+1388153004 // cs_officeb3_coop_v1_5
+813471321 // szepezd_b3_coopv1_2
+1172671775 // warehouse_coopv3b4
+1202839339 // de_vertigo_coop checkpoint
+939859861 // cs_motel_coop_nd_v1_3
+523594320 // osama_b3_checkpoint
+1202839339 // de_vertigo_coop checkpoint
