@@ -6023,8 +6023,10 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	//PrintToServer("BodyGroups: %d", g_iPlayerBGroups[client]);
 
 	// Check client valid
-	if (!IsClientInGame(client)) return Plugin_Continue;
-	
+	if (!IsClientInGame(client)) 
+	{
+	return Plugin_Continue;
+	}
 	// Set variable
 	new dmg_taken = GetEventInt(event, "damagebits");
 	if (dmg_taken <= 0)
@@ -9438,7 +9440,7 @@ public Action:GrenadeScreamCheckTimer(Handle:timer, any:entity)
 		if (IsFakeClient(client))
 			continue;
 
-		if (client > 0 && IsPlayerAlive(client) && GetClientTeam(client) == 2 && GetClientTeam(owner) == 3)
+		if (IsPlayerAlive(client) && GetClientTeam(client) == 2 && GetClientTeam(owner) == 3)
 		{
 
 			GetClientEyePosition(client, fPlayerEyeOrigin);
