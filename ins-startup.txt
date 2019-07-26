@@ -1,0 +1,8 @@
+//This is the startup parameters that I use for the server. Convert it to a batch file and put it with the srcds.exe file in insurgency2 folder.
+
+
+@echo off 
+title Insurgency Server 
+::start 
+start /wait /abovenormal srcds.exe +exec "pure.cfg" -workshop -maxplayers 48 -port 27025 +map de_vertigo_coop
+goto start

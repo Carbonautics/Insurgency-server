@@ -1,0 +1,27 @@
+// This file updates the steam and steamcmd for the server. change the variables inside " ...." and remove the  "...". Then convert this to a .cmd (for steamcmd) and execute. 
+
+
+
+
+@echo off 
+SETLOCAL ENABLEDELAYEDEXPANSION 
+						:: DEFINE the following variables where applicable to your install 
+						SET STEAMLOGIN="username password"
+						SET INSBRANCH=237410 
+						:: For stable use 237410 
+						
+						SET InsPath="G:\server\Games\Insurgency\InsServer\"
+						SET STEAMPATH="G:\server\Apps\Steam\"
+:: _________________________________________________________ 
+echo. 
+echo You are about to update Insurgency 
+echo Dir: %InsPath% 
+echo Branch: %INSBRANCH% 
+echo. 
+echo Key "ENTER" to proceed 
+pause 
+%STEAMPATH%\steamcmd.exe +login %STEAMLOGIN% +force_install_dir %InsPath% "+app_update %INSBRANCH%" validate  +quit
+echo . 
+echo Your Insurgency is now up to date 
+echo key "ENTER" to exit 
+pause

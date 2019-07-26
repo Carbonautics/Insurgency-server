@@ -1,4 +1,9 @@
+//theaters
+895129070	//ae_edit
 859127166 // The Armory: Expanded - 35 Angry Bots
+878171320	//ae_miscaddons
+//assets
+878171320  //ae_misc
 1093292666 // baghdad_coop_b5
 383525894 // khanashin_b8 checkpoint
 650616844 // estates_b4
