@@ -1,0 +1,70 @@
+// Advertisements 0.1BETA
+// by =F|A=Carbonautics 
+// 
+// Types
+// -----
+// C: Center message
+// H: Hint message
+// M: Menu message
+// S: Say message
+//    - Colors:  {DEFAULT}, {TEAM}, {GREEN}, {LIGHTGREEN}
+//    - Example: {GREEN}Current {LIGHTGREEN}Map: {DEFAULT}{CURRENTMAP}
+// T: Top message
+//    - Colors:  {WHITE},  {RED},  {GREEN}, {BLUE}, {YELLOW}, {PURPLE}, {CYAN},
+//               {ORANGE}, {PINK}, {OLIVE}, {LIME}, {VIOLET}, {LIGHTBLUE} 
+//    - Example: {ORANGE} www.domain.com
+//
+// Flags (optional)
+// -----
+// Accepts flags of admins that will not see the advertisement.
+// When omitted everyone will see the advertisement.
+// When left empty only admins will see the advertisement.
+
+"Advertisements"
+{
+	"1"
+	{
+		"type"		"S"
+		"text"		"{DEFAULT}You're playing on {LIGHTGREEN}=F|A= 35 Angry Bots Medic Coop{DEFAULT}, griefing, spamming, or continuous shit talking will lead to a permanent ban.  Just have fun and kill some bots!"
+	}
+	"2"
+	{
+		"type"		"S"
+		"text"		"{DEFAULT}Suggestions and feedback always welcomed."
+	}
+	"3"
+	{
+		"type"		"S"
+		"text"		"{DEFAULT}If you want to help with monthly costs and support our Community, you can donate on Website: {GREEN}https://fearless-assassins.com, {TEAM}Reserve slots access is given to Gold VIP or Above."
+		"flags"		"a"
+	}
+	"4"
+	{
+		"type"		"S"
+		"text"		"{DEFAULT}To find out more about the rules, admins, discord, donation,commands.  Type {GREEN}!info {DEFAULT}in chat"
+		"flags"		"a"
+	}
+    	"5"
+    	{
+        	"type"      "S"
+        	"text"      "{DEFAULT}To get more details or help regarding anything on the server, contact us on Our Discord: {GREEN}https://discord.clan-fa.com/"
+		"flags"		"a"
+   	}
+	"6"
+	{
+        	"type"      "S"
+        	"text"      "{DEFAULT}If someone is tk'ing, use {GREEN}!calladmin {DEFAULT}to notify ADMIN on Discord."
+    }
+	"7"
+	{
+		"type"		"S"
+		"text"		"{DEFAULT}New Server Changes(4/12), New maps etc., Check {GREEN} discord.clan-fa.com/ {DEFAULT}for more info"
+	}
+	"8"
+	{
+		"type"		"S"
+		"text"		"{DEFAULT}To find out more about the rules, admins, discord, donation,commands.  Type {GREEN}!info {DEFAULT}in chat"
+	}
+
+
+}
