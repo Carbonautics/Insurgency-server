@@ -1659,7 +1659,7 @@ public Action:Timer_Enemies_Remaining(Handle:Timer)
 		decl String:textToPrintChat[64];
 		decl String:textToPrint[64];
 		Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Total Enemies Left: %d", alive_insurgents + g_iRemaining_lives_team_ins);
-		Format(textToPrint, sizeof(textToPrint), "[INTEL]Total Enemies Left: %d",alive_insurgents + g_iRemaining_lives_team_ins);
+		Format(textToPrint, sizeof(textToPrint), "[INTEL]Total Enemies Left: %d", alive_insurgents + g_iRemaining_lives_team_ins);
 		PrintHintTextToAll(textToPrint);
 		PrintToChatAll(textToPrintChat);
 	}
