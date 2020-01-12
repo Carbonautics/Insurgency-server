@@ -46,7 +46,7 @@
 #define Healthkit_Timer_Tickrate			0.5		// Basic Sound has 0.8 loop
 #define Healthkit_Timer_Timeout				360.0 //6 minutes
 #define Healthkit_Radius					120.0
-#define Revive_Indicator_Radius				100.0
+#define Revive_Indicator_Radius				200.0
 #define Healthkit_Remove_Type				"1"
 #define Healthkit_Healing_Per_Tick_Min		1
 #define Healthkit_Healing_Per_Tick_Max		3
@@ -5974,7 +5974,14 @@ public Action:Timer_NearestBody(Handle:timer, any:data)
 					//Effect_SetMarkerAtPos(medic,beamPos,1.0,{255, 0, 0, 255}); 
 
 					//Beam dead when farther
-					TE_SetupBeamRingPoint(beamPos, 1.0, Revive_Indicator_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 15, 5.0, 3.0, 5.0, {255, 0, 0, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
+					if(StrContains(g_client_last_classstring[medic], "medic") > -1)
+					{
+					TE_SetupBeamRingPoint(beamPos, 1.0, Revive_Indicator_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 15, 5.0, 3.0, 5.0, {255, 255, 0, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
+					}
+					else if(!(StrContains(g_client_last_classstring[medic], "medic") > -1))
+					{
+						TE_SetupBeamRingPoint(beamPos, 1.0, Revive_Indicator_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 15, 5.0, 3.0, 5.0, {255, 0, 0, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
+					}
 					//void TE_SetupBeamRingPoint(const float center[3], float Start_Radius, float End_Radius, int ModelIndex, int HaloIndex, int StartFrame, int FrameRate, float Life, float Width, float Amplitude, const int Color[4], int Speed, int Flags)
 					TE_SendToClient(medic);
 				}
