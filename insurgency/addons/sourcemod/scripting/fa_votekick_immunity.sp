@@ -51,7 +51,7 @@ public Action:callvoteListener(client, const String:cmd[], argc)
 			return Plugin_Continue;
 		}
 		
-		PrintToChat(client, "\x01\x0759b0f9[INS]\x01 You are not allowed to vote this player!");
+		PrintToChat(client, "\x01\x0759b0f9[=F|A=]\x01 You are not allowed to vote this player/admin!");
 		
 		return Plugin_Handled;
 	}

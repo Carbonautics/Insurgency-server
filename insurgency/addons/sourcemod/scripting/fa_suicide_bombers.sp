@@ -355,7 +355,7 @@ public Action:Timer_BomberLoop(Handle:timer) //this controls bomber loop to chec
 				g_yellCounter[bomber]--;
 			}
 			
-			/*
+			
 			for (new victim = 1; victim <= MaxClients; victim++) // lets get our victim to compare distance
 			{
 				if (victim < 1 || !IsClientInGame(victim) || IsFakeClient(victim))
@@ -368,6 +368,8 @@ public Action:Timer_BomberLoop(Handle:timer) //this controls bomber loop to chec
 					//PrintToServer("[SUICIDE] Bomber Distance: %f ", tDistance);
 					
 					//PrintToServer("[SUICIDE] TIMER VICTIM DETECTED");
+					new validAntenna = -1;
+					validAntenna = FindValidProp_InDistance(bomber);
 					
 					if(tDistance < fBomberDistance)
 					{
@@ -375,21 +377,43 @@ public Action:Timer_BomberLoop(Handle:timer) //this controls bomber loop to chec
 						new tCanBomberSeeTarget = (ClientViews(bomber, victim, fBomberDistance, fBomberViewThreshold));
 						if (tCanBomberSeeTarget)
 						{	
+							new fRandomInt = GetRandomInt(0, 100); 
+								PrintToServer("fRandomInt: %d, CVAR %d", fRandomInt, GetConVarInt(cvar_jammer_chance));
+								if (fRandomInt < GetConVarInt(cvar_jammer_chance)) //Jam IED
+								{
+									PrintToServer("[SUICIDE] JAMMED");
+									EmitSoundToAll("weapons/ied/handling/ied_trigger_ins.wav", bomber, SNDCHAN_VOICE, _, _, 1.0);
+									EmitSoundToAll("player/voip_end_transmit_beep_03.wav", validAntenna, SNDCHAN_VOICE, _, _, 1.0);
+									EmitSoundToAll("ui/sfx/beep.wav", validAntenna, SNDCHAN_VOICE, _, _, 1.0);
+									PrintToChatAll("[Jammer] \x04***IED Bomber Jammed***\x04");
+									YellDetonateSound(bomber);
+								}
+								else
+								{
+									EmitSoundToAll("weapons/ied/handling/ied_trigger_ins.wav", bomber, SNDCHAN_VOICE, _, _, 1.0);
+									
+									PrintToServer("[SUICIDE] BOOM");
+									g_isDetonating[bomber] = 1;
+									CheckExplodeHurt(bomber, true);
+								}
+							}
+						else
+						{	
 							EmitSoundToAll("weapons/ied/handling/ied_trigger_ins.wav", bomber, SNDCHAN_VOICE, _, _, 1.0);
-								
+									
 							PrintToServer("[SUICIDE] BOOM");
 							g_isDetonating[bomber] = 1;
-							CheckExplodeHurt(bomber);
+							CheckExplodeHurt(bomber, true);
 						}
+					}
 						else
 						{
 							//PrintToServer("[SUICIDE] BOMBER HAS NO LOS!");
 						}
-					}
 				}
 			}
-			*/
 		}
+			
 	}
 }
 
@@ -521,7 +545,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 					//PrintToServer("[SUICIDE] incen/molotov DETECTED!");
 					if (fRandom <= fIncenDeathChance)
 					{
-						CheckExplodeHurt(victim);
+						CheckExplodeHurt(victim, false);
 					}
 				}
 				else if (StrEqual(weapon, "grenade_m67", false) || 
@@ -536,7 +560,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 					//PrintToServer("[SUICIDE] Explosive DETECTED!");
 					if (fRandom <= fExplosiveDeathChance)
 					{
-						CheckExplodeHurt(victim);
+						CheckExplodeHurt(victim,false);
 					}
 				}
 				//PrintToServer("[SUICIDE] HITRGOUP 0 [GENERIC]");
@@ -550,14 +574,14 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 				//if (fRandom < 0.75) // To compensate for higher caliber rifles that may kill target in 1-2 shots we raise chance o 75%
 				if (fRandom <= fChestStomachDeathChance)
 				{
-					CheckExplodeHurt(victim);
+					CheckExplodeHurt(victim, false);
 				}
 			}
 			else if (hitgroup == 4 || hitgroup == 5  || hitgroup == 6 || hitgroup == 7)
 			{
 				if (fRandom <= fLimbsDeathChance) //25% chance if shot in legs/arms to panic detonate
 				{
-					CheckExplodeHurt(victim);
+					CheckExplodeHurt(victim, false);
 				}
 			}
 		}
@@ -629,7 +653,7 @@ public Action:Timer_DetonatePeriodPlayer(Handle:timer, any:client)
 	
 	return Plugin_Continue;
 }
-public CheckExplodeHurt(client) {
+public CheckExplodeHurt(client, yellBool) {
 	g_isDetonating[client] = 1;
 	//new m_iSquad = GetEntProp(client, Prop_Send, "m_iSquad");
 	//new m_iSquadSlot = GetEntProp(client, Prop_Send, "m_iSquadSlot");
@@ -660,10 +684,11 @@ public CheckExplodeHurt(client) {
         // WritePackCell(bomberPack, ent);
 
 		if (DispatchSpawn(ent)) {
-			YellDetonateSound(client);
+			if (yellBool == true)
+				YellDetonateSound(client);
 			//PrintToChatAll("\x05Suicide Bomber detonated bomb.");
 			
-			DealDamage(ent,304,client,DMG_BLAST,"weapon_c4_ied");
+			DealDamage(ent,280,client,DMG_BLAST,"weapon_c4_ied");
 		}
 	}
 }

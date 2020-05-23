@@ -1,0 +1,131 @@
+NET_GetBindAddresses found 108.61.21.91: 'Intel(R) 82574L Gigabit Network Connection'
+Network: IP 108.61.21.92 mode MP, dedicated Yes, ports 27034 SV / 27005 CL
+Server is hibernating
+For FCVAR_REPLICATED, ConVar must be defined in client and game .dlls (sv_radial_spam_delay_leaderfrac)
+Parent cvar in server.dll not allowed (ins_bot_arousal_suppression_falloff)
+Parent cvar in server.dll not allowed (doi_bot_combat_suppress_fire_duration)
+Taglines: Listening to event round_start
+Taglines: Listening to event game_start
+maxplayers set to 32
+Unable to remove c:\games\doi\server3\crash_sockets!
+CCrashHandler - Crash handler created (PID 1800)
+Unknown command "joy_name"
+Unknown command "joy_advanced"
+Unknown command "joy_accelmax"
+Unknown command "joy_accelscale"
+Unknown command "joy_advaxisx"
+Unknown command "joy_advaxisy"
+Unknown command "joy_advaxisz"
+Unknown command "joy_advaxisr"
+Unknown command "joy_advaxisu"
+Unknown command "joy_advaxisv"
+Unknown command "joy_autoaimdampen"
+Unknown command "joy_autoaimdampenrange"
+Unknown command "joy_autosprint"
+Unknown command "joy_circle_correct"
+Unknown command "joy_diagonalpov"
+Unknown command "joy_display_input"
+Unknown command "joy_forwardsensitivity"
+Unknown command "joy_forwardthreshold"
+Unknown command "joy_inverty"
+Unknown command "joy_invertx"
+Unknown command "joy_lowend"
+Unknown command "joy_lowmap"
+Unknown command "joy_movement_stick"
+Unknown command "joy_pitchsensitivity"
+Unknown command "joy_pitchthreshold"
+Unknown command "joy_response_look"
+Unknown command "joy_response_move"
+Unknown command "joy_sidesensitivity"
+Unknown command "joy_sidethreshold"
+Unknown command "joy_yawsensitivity"
+Unknown command "joy_yawthreshold"
+Unknown command "joyadvancedupdate"
+Unknown command "joystick"
+Unknown command "+jlook"
+maxplayers set to 49
+---- Host_NewGame ----
+sv_pure_default set to: 1
+trusted_keys.txt not present; pure server using only base trusted key list
+Host_NewGame on map breville
+L 04/18/2020 - 04:00:03: -------- Mapchange to breville --------
+admincheats hooked 293 commands
+CGameEventManager::AddListener: event 'teamplay_win_panel' unknown.
+CGameEventManager::AddListener: event 'teamplay_restart_round' unknown.
+CGameEventManager::AddListener: event 'arena_win_panel' unknown.
+Executing dedicated server config file
+Executing 'server_doi3.cfg' config file
+MATCHMAKING: Server set to playlist 'nwi/coop' on ruleset 'default' (crc: 3343470757) (maxplayers: 32--1)
+Server logging enabled.
+Server logging data to file logs\L108_061_021_092_27034_202004180400_000.log
+L 04/18/2020 - 04:00:03: Log file started (file "logs\L108_061_021_092_27034_202004180400_000.log") (game "C:\games\doi\server3\doi") (version "6948")
+Unknown command "mp_tkpunish"
+L 04/18/2020 - 04:00:03: server_cvar: "spec_allow_bots" "1"
+Unknown command "sv_deadvoice"
+Unknown command "sv_deadtalk"
+Unknown command "sv_deadtalk_team"
+Unknown command "mp_voice_use_3d_voip"
+L 04/18/2020 - 04:00:03: server_cvar: "sv_hud_deathmessages" "1"
+Unknown command "sv_hud_scoreboard_show_kd"
+Unknown command "sv_hud_targetindicator"
+L 04/18/2020 - 04:00:03: server_cvar: "ins_bot_difficulty" "2"
+Unknown command "mp_player_resupply_delay_survival"
+L 04/18/2020 - 04:00:03: server_cvar: "mp_supply_token_base" "20"
+L 04/18/2020 - 04:00:03: server_cvar: "mp_supply_token_bot_base" "20"
+Unknown command "sv_battleye"
+Unknown command "?banid"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:23034128><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:167262147><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:1:60858166><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:1:39031657><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:57077730><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:160908132><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:60367683><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:0:10124612><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:195052015><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:1:82458772><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:203687159><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:59817491><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:38033635><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:147636401><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:0:132512910><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:69844331><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:14657404><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:29247365><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:14622358><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:104815817><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:30134929><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:153695937><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:181502992><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:209960320><>" was banned "permanently" by "Console"
+Can't ban users with ID "STEAM?_1"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:76974261><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:417981779><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:45857083><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:76570482><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:151999229><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:71869106><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:188814308><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:1:152575551><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:20804159><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:44351599><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:23440463><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:101818725><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:36998703><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:6470131><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:72694773><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:41107212><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:0:196052689><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:0:12432512><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:0:55685616><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:0:45890085><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:1:158820134><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_0:0:143970110><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Banid: "<><STEAM_1:1:192467559><>" was banned "permanently" by "Console"
+L 04/18/2020 - 04:00:03: Addip: "<><><>" was banned by IP "permanently" by "Console" (IP "81.23.116.186")
+L 04/18/2020 - 04:00:03: Addip: "<><><>" was banned by IP "permanently" by "Console" (IP "103.54.250.4")
+L 04/18/2020 - 04:00:03: Addip: "<><><>" was banned by IP "permanently" by "Console" (IP "92.98.130.154")
+L 04/18/2020 - 04:00:03: Addip: "<><><>" was banned by IP "permanently" by "Console" (IP "151.95.72.211")
+L 04/18/2020 - 04:00:03: Addip: "<><><>" was banned by IP "permanently" by "Console" (IP "178.151.79.233")
+L 04/18/2020 - 04:00:03: Addip: "<><><>" was banned by IP "permanently" by "Console" (IP "51.83.216.217")
+L
