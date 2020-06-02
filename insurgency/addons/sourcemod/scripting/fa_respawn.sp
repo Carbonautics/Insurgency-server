@@ -46,7 +46,7 @@
 #define Healthkit_Timer_Tickrate			0.5		// Basic Sound has 0.8 loop
 #define Healthkit_Timer_Timeout				360.0 //6 minutes
 #define Healthkit_Radius					120.0
-#define Revive_Indicator_Radius				200.0
+#define Revive_Indicator_Radius				100.0
 #define Healthkit_Remove_Type				"1"
 #define Healthkit_Healing_Per_Tick_Min		1
 #define Healthkit_Healing_Per_Tick_Max		3
@@ -1658,10 +1658,10 @@ public Action:Timer_Enemies_Remaining(Handle:Timer)
 		// Announce
 		decl String:textToPrintChat[64];
 		decl String:textToPrint[64];
-		//Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Total Enemies Left: %d", alive_insurgents + g_iRemaining_lives_team_ins);
-		Format(textToPrint, sizeof(textToPrint), "[INTEL]Total Enemies Left: %d", (alive_insurgents+g_iRemaining_lives_team_ins));
+		Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Total Enemies Left %d", g_iRemaining_lives_team_ins);
+		Format(textToPrint, sizeof(textToPrint), "[INTEL]Total Enemies Left: %d",g_iRemaining_lives_team_ins);
 		PrintHintTextToAll(textToPrint);
-		//PrintToChatAll(textToPrintChat);
+		PrintToChatAll(textToPrintChat);
 	}
 	else
 	{
@@ -1671,7 +1671,7 @@ public Action:Timer_Enemies_Remaining(Handle:Timer)
 		Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 		Format(textToPrint, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 		PrintHintTextToAll(textToPrint);
-		//PrintToChatAll(textToPrintChat);
+		PrintToChatAll(textToPrintChat);
 	}
 	return Plugin_Continue;
 }
@@ -1731,7 +1731,7 @@ public Action:Timer_EnemyReinforce(Handle:Timer)
 					Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 					Format(textToPrint, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 					PrintHintTextToAll(textToPrint);
-					//PrintToChatAll(textToPrintChat);
+					PrintToChatAll(textToPrintChat);
 				}
 			}
 		}
@@ -1770,10 +1770,10 @@ public Action:Timer_EnemyReinforce(Handle:Timer)
 						new fCommsChance = GetRandomInt(1, 100);
 						if (fCommsChance > 50)
 						{
-							//Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
+							Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 							Format(textToPrint, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 							PrintHintTextToAll(textToPrint);
-							//PrintToChatAll(textToPrintChat);
+							PrintToChatAll(textToPrintChat);
 						}
 					}
 					g_iReinforceTime = reinforce_time_subsequent;
@@ -1807,10 +1807,10 @@ public Action:Timer_EnemyReinforce(Handle:Timer)
 						new fCommsChance = GetRandomInt(1, 100);
 						if (fCommsChance > 50)
 						{
-							//Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
+							Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 							Format(textToPrint, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 							PrintHintTextToAll(textToPrint);
-							//PrintToChatAll(textToPrintChat);
+							PrintToChatAll(textToPrintChat);
 						}
 					}
 					// Reset reinforce time
@@ -1856,10 +1856,10 @@ public Action:Timer_EnemyReinforce(Handle:Timer)
 					new fCommsChance = GetRandomInt(1, 100);
 					if (fCommsChance > 50)
 					{
-						//Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
+						Format(textToPrintChat, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 						Format(textToPrint, sizeof(textToPrintChat), "[INTEL]Comms are down, build jammer to get enemy reports.");
 						PrintHintTextToAll(textToPrint);
-						//PrintToChatAll(textToPrintChat);
+						PrintToChatAll(textToPrintChat);
 					}
 				}
 			}
@@ -2099,7 +2099,7 @@ void AddLifeForStaticKilling(client)
 }
 
 // Monitor player's gear
-/*public Action:Timer_GearMonitor(Handle:Timer)
+public Action:Timer_GearMonitor(Handle:Timer)
 {
 	if (g_iRoundStatus == 0) return Plugin_Continue;
 	for (new client = 1; client <= MaxClients; client++)
@@ -2178,6 +2178,8 @@ void SetPlayerAmmo(client)
 					
 				}
 			}
+			
+			/*
 			If we need to track grenades (since they drop them on death, its a no)
 			SetGrenadeAmmo(client, Gren_M67, playerGrenadeType[client][0]);
 			SetGrenadeAmmo(client, Gren_Incen, playerGrenadeType[client][1]);
@@ -2189,6 +2191,7 @@ void SetPlayerAmmo(client)
 			SetGrenadeAmmo(client, Gren_C4, playerGrenadeType[client][7]);
 			SetGrenadeAmmo(client, Gren_AT4, playerGrenadeType[client][8]);
 			SetGrenadeAmmo(client, Gren_RPG7, playerGrenadeType[client][9]);
+			*/
 			//PrintToServer("SETWEAPON 3");
 		}
 		if (!IsFakeClient(client))
@@ -2215,6 +2218,7 @@ void GetPlayerAmmo(client)
 			playerAmmo[client][0] = GetWeaponAmmo(client, primaryWeapon, 0); //primary
 		if (secondaryWeapon != -1 && IsValidEntity(secondaryWeapon))
 			playerAmmo[client][1] = GetWeaponAmmo(client, secondaryWeapon, 1); //secondary	
+		/*
 		if (playerGrenades != -1 && IsValidEntity(playerGrenades))
 		{
 			 //PrintToServer("[GEAR] CLIENT HAS VALID GRENADES");
@@ -2229,9 +2233,10 @@ void GetPlayerAmmo(client)
 			 playerGrenadeType[client][8] = GetGrenadeAmmo(client, Gren_AT4);
 			 playerGrenadeType[client][9] = GetGrenadeAmmo(client, Gren_RPG7);
 		}
+		*/
 		//PrintToServer("G: %i, G: %i, G: %i, G: %i, G: %i, G: %i, G: %i, G: %i, G: %i, G: %i",playerGrenadeType[client][0], playerGrenadeType[client][1], playerGrenadeType[client][2],playerGrenadeType[client][3],playerGrenadeType[client][4],playerGrenadeType[client][5],playerGrenadeType[client][6],playerGrenadeType[client][7],playerGrenadeType[client][8],playerGrenadeType[client][9]); 
 	}
-}*/
+}
 
 /*
 #####################################################################
@@ -3083,20 +3088,14 @@ public Action:BotsReady_Timer(Handle:Timer)
 // When round ends, intialize variables
 public Action:Event_RoundEnd_Pre(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	/*for (new client = 1; client <= MaxClients; client++)
+	for (new client = 1; client <= MaxClients; client++)
 	{
-		if (!IsClientConnected(client)) {
+		if (IsFakeClient(client))
 			continue;
-		}
-		if (!IsClientInGame(client)) {
+		if (!IsValidClient(client))
 			continue;
-		}
-		if (!IsValidClient(client)) {
+		if (!IsClientInGame(client))
 			continue;
-		}		
-		if (IsFakeClient(client)) {
-			continue;
-		}
 		new tTeam = GetClientTeam(client);
 		if (tTeam != TEAM_1)
 			continue;
@@ -3108,7 +3107,7 @@ public Action:Event_RoundEnd_Pre(Handle:event, const String:name[], bool:dontBro
 			PrintHintText(client, "%s", sBuf);
 			PrintToChatAll("%s", sBuf);
 		}
-	}*/
+	}
 	// Stop counter-attack music
 	//StopCounterAttackMusic();
 
@@ -3273,7 +3272,7 @@ public Action:Event_ControlPointCaptured_Pre(Handle:event, const String:name[], 
 		SetConVarInt(cvar, 1, true, false);
 		if (largeCounterEnabled)
 		{
-			//PrintHintTextToAll("[INTEL]: Enemy forces are sending a large counter-attack your way!  Get ready to defend!");
+			PrintHintTextToAll("[INTEL]: Enemy forces are sending a large counter-attack your way!  Get ready to defend!");
 			PrintToChatAll("[INTEL]: Enemy forces are sending a large counter-attack your way!  Get ready to defend!");
 		}
 		// Call music timer
@@ -3510,7 +3509,7 @@ public Action:Event_ObjectDestroyed_Pre(Handle:event, const String:name[], bool:
 		SetConVarInt(cvar, 1, true, false);
 		if (largeCounterEnabled)
 		{
-			//PrintHintTextToAll("[INTEL]: Enemy forces are sending a large counter-attack your way!  Get ready to defend!");
+			PrintHintTextToAll("[INTEL]: Enemy forces are sending a large counter-attack your way!  Get ready to defend!");
 			PrintToChatAll("[INTEL]: Enemy forces are sending a large counter-attack your way!  Get ready to defend!");
 		}
 		// Call music timer
@@ -3577,7 +3576,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	{
 		g_huntCacheDestroyed = true;
 		//g_iReinforceTime = g_iReinforceTime + g_huntReinforceCacheAdd;
-		//PrintHintTextToAll("Cache destroyed! Kill all enemies and reinforcements to win!");
+		PrintHintTextToAll("Cache destroyed! Kill all enemies and reinforcements to win!");
 		PrintToChatAll("Cache destroyed! Kill all enemies and reinforcements to win!");
 		
 	}
@@ -3980,22 +3979,22 @@ public Action:Event_PlayerPickSquad_Post( Handle:event, const String:name[], boo
 			Format(sNewNickname, sizeof(sNewNickname), "[ADMIN][MEDIC] %s", g_client_org_nickname[client]);
 		// Donor medic
 		else if (GetConVarInt(sm_respawn_enable_donor_tag) == 1 && (GetUserFlagBits(client) & ADMFLAG_CUSTOM2))
-			Format(sNewNickname, sizeof(sNewNickname), "[DONOR][MEDIC] %s", g_client_org_nickname[client]);
+			Format(sNewNickname, sizeof(sNewNickname), "[VIP][MEDIC] %s", g_client_org_nickname[client]);
 		// Normal medic
 		else
 			Format(sNewNickname, sizeof(sNewNickname), "[MEDIC] %s", g_client_org_nickname[client]);
 	}
-	else if (StrContains(g_client_last_classstring[client], "mg") > -1)
+	else if (StrContains(g_client_last_classstring[client], "engineer") > -1)
 	{
 		// Admin medic
 		if (GetConVarInt(sm_respawn_enable_donor_tag) == 1 && (GetUserFlagBits(client) & ADMFLAG_KICK))
-			Format(sNewNickname, sizeof(sNewNickname), "[ADMIN][MG] %s", g_client_org_nickname[client]);
+			Format(sNewNickname, sizeof(sNewNickname), "[ADMIN][ENGINEER] %s", g_client_org_nickname[client]);
 		// Donor medic
 		else if (GetConVarInt(sm_respawn_enable_donor_tag) == 1 && (GetUserFlagBits(client) & ADMFLAG_CUSTOM2))
-			Format(sNewNickname, sizeof(sNewNickname), "[DONOR][MG] %s", g_client_org_nickname[client]);
+			Format(sNewNickname, sizeof(sNewNickname), "[VIP][ENGINEER] %s", g_client_org_nickname[client]);
 		// Normal medic
 		else
-			Format(sNewNickname, sizeof(sNewNickname), "[MG] %s", g_client_org_nickname[client]);
+			Format(sNewNickname, sizeof(sNewNickname), "[ENGINEER] %s", g_client_org_nickname[client]);
 	}
 	// Normal class
 	else
@@ -4005,7 +4004,7 @@ public Action:Event_PlayerPickSquad_Post( Handle:event, const String:name[], boo
 			Format(sNewNickname, sizeof(sNewNickname), "[ADMIN] %s", g_client_org_nickname[client]);
 		// Donor
 		else if (GetConVarInt(sm_respawn_enable_donor_tag) == 1 && (GetUserFlagBits(client) & ADMFLAG_CUSTOM2))
-			Format(sNewNickname, sizeof(sNewNickname), "[DONOR] %s", g_client_org_nickname[client]);
+			Format(sNewNickname, sizeof(sNewNickname), "[VIP] %s", g_client_org_nickname[client]);
 		// Normal player
 		else
 			Format(sNewNickname, sizeof(sNewNickname), "%s", g_client_org_nickname[client]);
@@ -4608,8 +4607,8 @@ public Action:RespawnPlayerRevive(Handle:Timer, any:client)
 	SDKCall(g_hForceRespawn, client);
 	
 	// If set 'sm_respawn_enable_track_ammo', restore player's ammo
-	 //if (playerRevived[client] == true && g_iCvar_enable_track_ammo == 1)
-	 	//SetPlayerAmmo(client);
+	 if (playerRevived[client] == true && g_iCvar_enable_track_ammo == 1)
+	 	SetPlayerAmmo(client);
 	
 	//Set wound health
 	new iHealth = GetClientHealth(client);
@@ -4688,8 +4687,8 @@ public Action:RespawnPlayerPost(Handle:timer, any:client)
 	if (!IsClientInGame(client)) return;
 	
 	// If set 'sm_respawn_enable_track_ammo', restore player's ammo
-	//if (g_iCvar_enable_track_ammo == 1)
-	 	//SetPlayerAmmo(client);
+	 if (g_iCvar_enable_track_ammo == 1)
+	 	SetPlayerAmmo(client);
 	
 	// Teleport to avtive counter attack point
 	//PrintToServer("[REVIVE_DEBUG] called RespawnPlayerPost for client %N (%d)",client,client);
@@ -5975,14 +5974,7 @@ public Action:Timer_NearestBody(Handle:timer, any:data)
 					//Effect_SetMarkerAtPos(medic,beamPos,1.0,{255, 0, 0, 255}); 
 
 					//Beam dead when farther
-					if(StrContains(g_client_last_classstring[medic], "medic") > -1)
-					{
-					TE_SetupBeamRingPoint(beamPos, 1.0, Revive_Indicator_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 15, 5.0, 3.0, 5.0, {255, 255, 0, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
-					}
-					else if(!(StrContains(g_client_last_classstring[medic], "medic") > -1))
-					{
-						TE_SetupBeamRingPoint(beamPos, 1.0, Revive_Indicator_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 15, 5.0, 3.0, 5.0, {255, 0, 0, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
-					}
+					TE_SetupBeamRingPoint(beamPos, 1.0, Revive_Indicator_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 15, 5.0, 3.0, 5.0, {255, 0, 0, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
 					//void TE_SetupBeamRingPoint(const float center[3], float Start_Radius, float End_Radius, int ModelIndex, int HaloIndex, int StartFrame, int FrameRate, float Life, float Width, float Amplitude, const int Color[4], int Speed, int Flags)
 					TE_SendToClient(medic);
 				}
@@ -7540,7 +7532,7 @@ public Action:Healthkit(Handle:timer, Handle:hDatapack)
 
 								GetEdictClassname(ActiveWeapon, sWeapon, sizeof(sWeapon));
 								new iHealth = GetClientHealth(client);
-								if ((StrContains(sWeapon, "weapon_knife") > -1))
+								if ((StrContains(sWeapon, "weapon_knife") > -1) || (StrContains(sWeapon, "weapon_kabar") > -1))
 								{
 									//PrintToServer("DEBUG 8");
 									if (iHealth < g_nonMedicHealSelf_max)
@@ -7571,7 +7563,7 @@ public Action:Healthkit(Handle:timer, Handle:hDatapack)
 									}
 
 								}
-								else if (iHealth < g_nonMedicHealSelf_max && !(StrContains(sWeapon, "weapon_knife") > -1))
+								else if (iHealth < g_nonMedicHealSelf_max && !(StrContains(sWeapon, "weapon_knife") > -1) || !(StrContains(sWeapon, "weapon_kabar") > -1))
 								{
 										PrintHintText(client, "No medics nearby! Pull knife out to heal! (HP: %i)", iHealth);
 								}

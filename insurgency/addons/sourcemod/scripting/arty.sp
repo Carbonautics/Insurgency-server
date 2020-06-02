@@ -149,12 +149,12 @@ public Action Event_RoundStart(Event event, const char[] name, bool dontBroadcas
 
 public Action Event_PlayerPickSquad(Event event, const char[] name, bool dontBroadcast) {
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	char template[64];
-	event.GetString("class_template", template, sizeof(template), "");
-	char class[64];
-	gCvarClass.GetString(class, sizeof(class));
+	//char template[64];
+	//event.GetString("class_template", template, sizeof(template), "");
+	//char class[64];
+	//gCvarClass.GetString(class, sizeof(class));
 
-	IsEnabled[client] = (StrContains(template, class, false) > -1);
+	IsEnabled[client] = true; //(StrContains(template, class, false) > -1);
 
 	return Plugin_Continue;
 }

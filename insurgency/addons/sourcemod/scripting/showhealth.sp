@@ -50,8 +50,6 @@ public OnPluginStart()
 	cookie_show_health = RegClientCookie("Show Health On/Off", "", CookieAccess_Private);
 	SetCookieMenuItem(CookieMenuHandler_ShowHealth, 1, "Show Health");
 	
-	AutoExecConfig(true,"plugin.showhealth");
-	
 	if(!g_bIsInit)
 	{
 		g_bIsInit = true;

@@ -26,7 +26,7 @@ enum Teams
 };
 
 int g_iPlayerEquipGear;
-int nArmorFireResistance = 5;
+int nArmorFireResistance = 2;
 int nFireAmmoID = 114;
 
 public OnPluginStart()
