@@ -218,7 +218,7 @@ public OnPluginStart()
 	RegAdminCmd("om_remove_prop", AdminRemovePropAim, ADMFLAG_SLAY, "Admin Prop Removal by aim");
 	//RegConsoleCmd(sPropCommand, PropCommand);
 
-	AutoExecConfig(true, "sernix_prop_spawn");
+	AutoExecConfig(true, "fa_propspawn");
 }
 
 // On map starts, call initalizing function
@@ -302,11 +302,15 @@ public ScaleBuildPoints() {
 	
 	if (nAvailableSupplyPoint <= 22)
 		nAvailableSupplyPoint = 22;
+	else if(nAvailableSupplyPoint > 30)
+		nAvailableSupplyPoint = 30;
 	//Credits 
 	if (tEngCount > 0)
 		iDefCredits = ((nAvailableSupplyPoint * 3) / tEngCount);
 	else
 		iDefCredits = (nAvailableSupplyPoint * 3);
+	if(iDefCredits > 60)
+		iDefCredits = 60;
 }
 
 public Action:Event_RoundEnd(Handle:event, const String:name[], bool:dontBroadcast)

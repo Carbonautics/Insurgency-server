@@ -1,0 +1,42 @@
+"Phrases"
+{
+	"PanelTitle"
+	{
+		"en"		"Medic Class"
+	}
+	
+	"PanelClose"
+	{
+		"en"		"0. Close"
+	}
+	
+	"PanelLine1"
+	{
+		"en"		"You chose Medic Class. Your primary job is to heal injured players, and revive downed team-mates."
+	}
+	
+	"PanelLine2"
+	{
+		"en"		"!info - for more details, !rules - for server rules. For more queries/questions join Forums/Steam Group/Discord."
+	}
+	
+	"PanelLine3"
+	{
+		"en"		"Medic have Defibrillators. Defibs are used to revive/heal(slower than medkit) everyone including yourself."
+	}
+	
+	"PanelLine4"
+	{
+		"en"		"Medkits heals the fastest on this Server. It can heal while holding in hands or deployed on ground(use knife to heal);| Medic>self: 80HP | Medic>others:100HP | Others: 40HP | "
+	}
+	
+	"PanelLine5"
+	{
+		"en"		"You can equip flare in explosive slot to call Team reinforcement waves. You can equip Artillery Flare to call Arty at enemy locations."
+	}
+	
+	"PanelLine6"
+	{
+		"en"		"To DRAG Friendly Ragdolls: Press (Crouch+Sprint) while moving with W,A,S,D. Make sure to have crouch/sprint on HOLD & NOT TOGGLE or dragging won't work."
+	}
+}

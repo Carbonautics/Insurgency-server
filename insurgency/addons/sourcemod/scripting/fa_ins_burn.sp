@@ -26,7 +26,7 @@ enum Teams
 };
 
 int g_iPlayerEquipGear;
-int nArmorFireResistance = 2;
+int nArmorFireResistance = 6;
 int nFireAmmoID = 114;
 
 public OnPluginStart()
@@ -118,7 +118,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	//=============================
 	
 	//Get weapon ID
-	int AttackerWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
+/*	int AttackerWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
 	if(AttackerWeapon < 0)
 	{
 		return Plugin_Continue;
@@ -139,7 +139,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 				IgniteEntity(client, 7.0);
 			}
 		}
-	}
+	}*/
 	//=============================
 	//FIRE AMMO SECTION (END)
 	//=============================

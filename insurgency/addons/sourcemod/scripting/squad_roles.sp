@@ -96,6 +96,21 @@ SetNewName(client, String:class_template[])
 		else
 			Format(flag, sizeof(flag), "|DOC|%s", oName[client]);
 	}
+	else if (StrContains(class_template, "engineer") > -1)
+	{
+		// Admin Engineer
+		if (GetUserFlagBits(client) & ADMFLAG_KICK)
+			Format(flag, sizeof(flag), "|ADM|ENG|%s", oName[client]);
+		// Donor Engineer
+		else if (GetUserFlagBits(client) & ADMFLAG_CUSTOM2)
+			Format(flag, sizeof(flag), "|DONOR|ENG|%s", oName[client]);
+		// Admin Donor Engineer
+		else if (GetUserFlagBits(client) & (ADMFLAG_KICK | ADMFLAG_CUSTOM2) == (ADMFLAG_KICK | ADMFLAG_CUSTOM2))
+			Format(flag, sizeof(flag), "|ADM|DONOR|ENG|%s", oName[client]);
+		// Normal Engineer
+		else
+			Format(flag, sizeof(flag), "|ENG|%s", oName[client]);
+	}
 	else
 	{
 		// Admin

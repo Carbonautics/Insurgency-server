@@ -25,14 +25,19 @@ public Plugin myinfo = {
 UserMsg g_FadeUserMsgId;
 new 
 	Handle:cvar_injury_display_delay = INVALID_HANDLE,
+	Handle:cvar_show_health_display_delay = INVALID_HANDLE,
+	Float:g_fShowHealthDelay,
 	Float:g_fDisplayDelay,
 	bool:g_bIsInit = false,
 	bool:g_bIsChangedDelay = false;
+	bool:g_bIsChangedshDelay = false;
 
 public void OnPluginStart() 
 {
 	cvar_injury_display_delay = CreateConVar("sm_injury_display_delay", "10", "Defines display delay time", FCVAR_PLUGIN);
+	cvar_show_health_display_delay = CreateConVar("sm_show_health_display_delay", "35", "Defines display delay time", FCVAR_PLUGIN);
 	HookConVarChange(cvar_injury_display_delay, OnDisplayDelayChange);
+	HookConVarChange(cvar_show_health_display_delay, OnShowHealthDelayChange);
 	LoadTranslations("common.phrases");
 	AutoExecConfig(true, "plugin.injury");
 	g_FadeUserMsgId = GetUserMessageId("Fade");
@@ -42,7 +47,8 @@ public void OnPluginStart()
 	{
 		g_bIsInit = true;
 		g_fDisplayDelay = GetConVarFloat(cvar_injury_display_delay);
-		CreateTimer(g_fDisplayDelay, Timer_RefreshHealthText, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+		g_fShowHealthDelay = GetConVarFloat(cvar_show_health_display_delay);
+		CreateTimer(g_fDisplayDelay, Timer_RefreshShowHealthText, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 	}
 }
 public OnMapStart()
@@ -51,7 +57,9 @@ public OnMapStart()
 	{
 		g_bIsInit = true;
 		g_fDisplayDelay = GetConVarFloat(cvar_injury_display_delay);
-		CreateTimer(g_fDisplayDelay, Timer_RefreshHealthText, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+		CreateTimer(g_fDisplayDelay, Timer_RefreshHealthAmt, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+		g_fShowHealthDelay = GetConVarFloat(cvar_show_health_display_delay);
+		CreateTimer(g_fDisplayDelay, Timer_RefreshShowHealthText, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 	}
 }
 public OnMapEnd()
@@ -59,11 +67,50 @@ public OnMapEnd()
 	g_bIsInit = false;
 }
 
-public Action:Timer_RefreshHealthText(Handle:timer)
+public Action:Timer_RefreshHealthAmt(Handle:timer)
 {
 	if (g_bIsChangedDelay)
 	{
 		g_bIsChangedDelay = false;
+		g_bIsInit = false;
+		CreateTimer(g_fDisplayDelay, Timer_RestartHealthTimer);
+		PrintToServer("[Injury] Restarting");
+		return Plugin_Stop;
+	}
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (IsClientInGame(client) && !IsFakeClient(client) && !IsClientObserver(client) && GetClientTeam(client) == 2)
+		{
+				//int iHealth = GetEntProp(client, Prop_Data, "m_iHealth");
+			int iHealth = GetClientHealth(client);
+			int amount;
+			if(iHealth >=50 && iHealth < 70)
+			{
+				amount = 50;
+			}
+			else if(iHealth >=30 && iHealth < 50)
+			{
+				amount = 100;
+			}
+			else if(iHealth >=10 && iHealth < 30)
+			{
+				amount = 125;
+			}
+			else if(iHealth >=1 && iHealth < 10)
+			{
+				amount = 150;
+			}
+			//injury(client, 0);
+			injury(client, amount);
+		}
+	}
+	return Plugin_Continue;
+}
+public Action:Timer_RefreshShowHealthText(Handle:timer)
+{
+	if (g_bIsChangedshDelay)
+	{
+		g_bIsChangedshDelay = false;
 		g_bIsInit = false;
 		CreateTimer(g_fDisplayDelay, Timer_RestartHealthTimer);
 		PrintToServer("[Injury] Restarting");
@@ -74,74 +121,52 @@ public Action:Timer_RefreshHealthText(Handle:timer)
 	{
 		if (IsClientInGame(client) && !IsFakeClient(client) && !IsClientObserver(client) && GetClientTeam(client) == 2)
 		{
-				//int iHealth = GetEntProp(client, Prop_Data, "m_iHealth");
 			int iHealth = GetClientHealth(client);
-			int amount;
-			if(iHealth >=90 && iHealth <= 100 || iHealth == 0)
+			if(iHealth < 90)
 			{
-				amount = 0;
+				PrintHintText(client,"You are injured, heal to gain Normal vision! HP: %d", iHealth);
 			}
-			else if(iHealth >=70 && iHealth < 90)
-			{
-				amount = 50;
-			}
-			else if(iHealth >=50 && iHealth < 70)
-			{
-				amount = 100;
-			}
-			else if(iHealth >=30 && iHealth < 50)
-			{
-				amount = 150;
-			}
-			else if(iHealth >=10 && iHealth < 30)
-			{
-				amount = 175;
-			}
-			else if(iHealth >=1 && iHealth < 10)
-			{
-				amount = 230;
-			}
-			injury(client, 0);
-			injury(client, amount);
 		}
 	}
 	return Plugin_Continue;
 }
 
-
 public Action Event_Hurt(Handle event, const char[] name, bool dontBroadcast) {
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	
+
 	if (IsClientInGame(client) && IsPlayerAlive(client) && GetClientTeam(client) == 2)
 	{
 		//int iHealth = GetEntProp(client, Prop_Data, "m_iHealth");
 		int iHealth = GetClientHealth(client);
 		int amount;
-		if(iHealth >=90 && iHealth <= 100 || iHealth == 0)
+		if (IsClientInGame(client) && !IsFakeClient(client) && !IsClientObserver(client) && GetClientTeam(client) == 2)
 		{
-			amount = 0;
+				//int iHealth = GetEntProp(client, Prop_Data, "m_iHealth");
+			int iHealth = GetClientHealth(client);
+			int amount;
+			if(iHealth >=50 && iHealth < 70)
+			{
+				amount = 50;
+				PrintCenterText(client,"You are injured, heal to gain Normal vision! HP: %d", iHealth);
+			}
+			else if(iHealth >=30 && iHealth < 50)
+			{
+				amount = 100;
+				PrintCenterText(client,"You are injured, heal to gain Normal vision! HP: %d", iHealth);
+			}
+			else if(iHealth >=10 && iHealth < 30)
+			{
+				amount = 125;
+				PrintCenterText(client,"You are injured, heal to gain Normal vision! HP: %d", iHealth);
+			}
+			else if(iHealth >=1 && iHealth < 10)
+			{
+				amount = 150;
+				PrintCenterText(client,"You are injured, heal to gain Normal vision! HP: %d", iHealth);
+			}
+			//injury(client, 0);
+			injury(client, amount);
 		}
-		else if(iHealth >=70 && iHealth < 90)
-		{
-			amount = 50;
-		}
-		else if(iHealth >=50 && iHealth < 70)
-		{
-			amount = 100;
-		}
-		else if(iHealth >=30 && iHealth < 50)
-		{
-			amount = 150;
-		}
-		else if(iHealth >=10 && iHealth < 30)
-		{
-			amount = 175;
-		}
-		else if(iHealth >=1 && iHealth < 10)
-		{
-			amount = 230;
-		}
-		injury(client, amount);
 	}
 	return Plugin_Continue;
 }
@@ -149,21 +174,20 @@ void injury(int target, int amount)
 {
 	int targets[2];
 	targets[0] = target;
-	int duration = 236;
-	int holdtime = 1536;
+	int duration = 700;
+	int holdtime = 4536;
 	int flags;
 	if(amount == 0)
-	{	
+	{
 		flags = (0x0001 | 0x0010);
 	}
 	else
 	{
-		flags = (0x0002 | 0x0008);
+		flags = (0x0002);
 	}
-	
+
 	int color[4] = { 0, 0, 0, 0 };
 	color[3] = amount;
-	
 	Handle message = StartMessageEx(g_FadeUserMsgId, targets, 1);
 	if (GetUserMessageType() == UM_Protobuf)
 	{
@@ -178,7 +202,7 @@ void injury(int target, int amount)
 		BfWrite bf = UserMessageToBfWrite(message);
 		bf.WriteShort(duration);
 		bf.WriteShort(holdtime);
-		bf.WriteShort(flags);		
+		bf.WriteShort(flags);
 		bf.WriteByte(color[0]);
 		bf.WriteByte(color[1]);
 		bf.WriteByte(color[2]);
@@ -189,10 +213,15 @@ void injury(int target, int amount)
 public OnDisplayDelayChange(Handle:convar_hndl, const String:oldValue[], const String:newValue[])
 {
 	g_bIsChangedDelay = true;
-	//injury_on_hit_only = GetConVarBool(cvar_injury_on_hit_only);
 	g_fDisplayDelay = GetConVarFloat(cvar_injury_display_delay);
 	CreateTimer(g_fDisplayDelay, Timer_RestartHealthTimer);
 	PrintToServer("[Injury] Timer cvars changed (g_fDisplayDelay: %f)", g_fDisplayDelay);
+}
+public OnShowHealthDelayChange(Handle:convar_hndl, const String:oldValue[], const String:newValue[])
+{
+	g_bIsChangedshDelay = true;
+	g_fDisplayDelay = GetConVarFloat(cvar_show_health_display_delay);
+
 }
 
 public Action:Timer_RestartHealthTimer(Handle:timer)
@@ -202,7 +231,7 @@ public Action:Timer_RestartHealthTimer(Handle:timer)
 	{
 		g_bIsInit = true;
 		g_fDisplayDelay = GetConVarFloat(cvar_injury_display_delay);
-		CreateTimer(g_fDisplayDelay, Timer_RefreshHealthText, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+		CreateTimer(g_fDisplayDelay, Timer_RefreshHealthAmt, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 	}
 }
 

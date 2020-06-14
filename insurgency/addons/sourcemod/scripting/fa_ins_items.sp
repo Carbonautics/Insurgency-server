@@ -12,7 +12,7 @@ enum Teams
 	TEAM_INSURGENTS,
 };
 
-new g_nFireResistance_ID = 2;
+new g_nFireResistance_ID = 6;
 new g_nSunglasses_ID = 1;
 new g_nDoubleJump_ID = 2;
 new g_nSpeedBoost_ID = 3;

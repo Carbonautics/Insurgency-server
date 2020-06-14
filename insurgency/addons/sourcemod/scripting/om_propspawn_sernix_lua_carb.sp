@@ -578,7 +578,7 @@ public Action:Timer_Monitor_Props(Handle:Timer)
 
 								if (iPropRef == mPropRef && fDistance <= 120 && (StrContains(g_client_last_classstring[client], "engineer") > -1))
 								{
-									if ((StrContains(sWeapon, "weapon_knife") > -1) || (StrContains(sWeapon, "weapon_wrench") > -1))
+									if ((StrContains(sWeapon, "weapon_knife") > -1) || (StrContains(sWeapon, "weapon_wrench") > -1) || (StrContains(sWeapon, "weapon_kabar") > -1))
 									{
 										//PrintToServer("g_integrityRepair: %d | propIntegrity %d", g_integrityRepair, propIntegrity);
 										propIntegrity = propIntegrity + g_integrityRepair;
