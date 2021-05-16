@@ -262,7 +262,7 @@ public FindValidProp_InDistance(client)
 		if (StrEqual(propModelName, "models/sernix/ied_jammer/ied_jammer.mdl"))
 		{
 			new Float:tDistance = (GetEntitiesDistance(client, prop));
-			if (tDistance <= (GetConVarFloat(cvar_jammer_range) / 2))
+			if (tDistance <= (GetConVarFloat(cvar_jammer_range)))
 			{
 				return prop;
 			}
@@ -533,11 +533,11 @@ public CheckExplodeHurt(client, yellBool) {
         // WritePackCell(bomberPack, ent);
 
 		if (DispatchSpawn(ent)) {
-			if (yellBool == true) {
+			if (yellBool == true)
 				YellDetonateSound(client);
-				DealDamage(ent,280,client,DMG_BLAST,"weapon_c4_ied");
-			}
 			//PrintToChatAll("\x05Suicide Bomber detonated bomb.");
+			
+			DealDamage(ent,280,client,DMG_BLAST,"weapon_c4_ied");
 		}
 	}
 }
@@ -623,10 +623,11 @@ public CheckExplodeDeath(client) {
 		
 		if (DispatchSpawn(ent)) {
 			//PrintToServer("[SUICIDE] Detonating IED entity");
-				YellDetonateSound(client);
-				//PrintToChatAll("\x05Suicide Bomber detonated bomb.");
-				
-				DealDamage(ent,280,client,DMG_BLAST,"weapon_c4_ied");
+			
+			YellDetonateSound(client);
+			//PrintToChatAll("\x05Suicide Bomber detonated bomb.");
+			
+			DealDamage(ent,280,client,DMG_BLAST,"weapon_c4_ied");
 		}
 	}
 }

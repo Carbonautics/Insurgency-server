@@ -12,10 +12,10 @@ enum Teams
 	TEAM_INSURGENTS,
 };
 
-new g_nFireResistance_ID = 6;
-new g_nSunglasses_ID = 1;
-new g_nDoubleJump_ID = 2;
-new g_nSpeedBoost_ID = 3;
+new g_nFireResistance_ID = 8;
+new g_nSunglasses_ID = 30;
+new g_nDoubleJump_ID = 26;
+new g_nSpeedBoost_ID = 27;
 new g_nGasMask_ID = 25;
 
 new g_iPlayerEquipGear;
@@ -184,7 +184,7 @@ public Action:Event_PlayerRespawnPre(Handle:event, const String:name[], bool:don
 	{	
 		//Speed boost
 		//Get player misc item (5th offset with a DWORD(4 bytes))
-		new nPerkSpeedBoostItemID = GetEntData(client, g_iPlayerEquipGear + (4 * 4));
+		new nPerkSpeedBoostItemID = GetEntData(client, g_iPlayerEquipGear + (4 * 5));
 		
 		//If item is speed boost ID
 		if((nPerkSpeedBoostItemID == g_nSpeedBoost_ID) || (client == g_nClientRunnerID))
@@ -210,7 +210,7 @@ public Action:ResupplyListener(client, const String:cmd[], argc)
 	{	
 		//Speed boost
 		//Get player misc item (5th offset with a DWORD(4 bytes))
-		new nPerkSpeedBoostItemID = GetEntData(client, g_iPlayerEquipGear + (4 * 4));
+		new nPerkSpeedBoostItemID = GetEntData(client, g_iPlayerEquipGear + (4 * 5));
 		
 		//If item is speed boost ID
 		if(nPerkSpeedBoostItemID == g_nSpeedBoost_ID)
@@ -302,7 +302,7 @@ stock Landed(const any:client) {
 stock ReJump(const any:client) {
 	//Double jump check with item
 	//Get player misc item (5th offset with a DWORD(4 bytes))
-	new nPerkItemID = GetEntData(client, g_iPlayerEquipGear + (4 * 4))
+	new nPerkItemID = GetEntData(client, g_iPlayerEquipGear + (4 * 5))
 	
 	//If item is 26 then its double jump perk. Allow player to perform a double jump
 	if(nPerkItemID == g_nDoubleJump_ID)

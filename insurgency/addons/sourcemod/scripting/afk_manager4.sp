@@ -1822,7 +1822,7 @@ public Action Timer_CheckPlayer(Handle Timer, int client) // General AFK Timers
 											LogDebug(false, "Timer_CheckPlayer - Client: %i Checking Spawn Move Warning AFK Spawn Timeleft: %i", client, AFKSpawnTimeleft);
 #endif
 											if ((cvarSpawnTime - AFKSpawnTime) <= GetConVarInt(hCvarWarnSpawnTime))
-												AFK_PrintToChat(client, "%t", "Spawn_Move_Warning", AFKSpawnTimeleft);
+												AFK_PrintToChat(client, "%t", "g_sPrefixawn_Move_Warning", AFKSpawnTimeleft);
 										}
 										return Plugin_Continue;
 									}

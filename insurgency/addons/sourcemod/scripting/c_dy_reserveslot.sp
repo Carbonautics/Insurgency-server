@@ -61,7 +61,7 @@ public OnPluginStart()
   
   // register console cvars
   
- // s_svVisiblemaxplayers = FindConVar("sv_visiblemaxplayers");
+  //s_svVisiblemaxplayers = FindConVar("sv_visiblemaxplayers");
   
   s_smHreservedSlotsEnable = CreateConVar("sm_ins_reserved_slots_enable", "1", "disable/enable reserved slots");
   //s_smHreservedSlotsAmount = CreateConVar("sm_ins_reserved_slots_amount", "1", "number of reserved slots (do not specify or set to -1 to automatically use hidden slots as reserved)");
@@ -69,7 +69,7 @@ public OnPluginStart()
   s_smHreservedUseImmunity = CreateConVar("sm_hreserved_use_immunity", "1", "use sourcemod immunity level to find a player to be dropped (0: do not use immunity , 1: use immunity level)");
   s_smHreservedImmunityDecrement = CreateConVar("sm_hreserved_immunity_decrement", "1", "value to be subtracted from the immunity level of spectators. The value 0 will make spectators to be treated like players in the game");
 
-  s_smHreservedDropMethod = CreateConVar("sm_hreserved_drop_method", "1", "method for dropping players to free a reserved slot (0: no players are dropped from server, 1: kick, 2: offer to be redirected to the server specified in sm_hreserved_redirect_target)");
+  s_smHreservedDropMethod = CreateConVar("sm_hreserved_drop_method", "0", "method for dropping players to free a reserved slot (0: no players are dropped from server, 1: kick, 2: offer to be redirected to the server specified in sm_hreserved_redirect_target)");
   s_smHreservedDropSelect = CreateConVar("sm_hreserved_drop_select", "1", "select how players are chosen to be dropped from server when there are multiple targets with the same priority. (0: highest ping, 1: shortest connection time, 2: random)");
 
   // new for 1.3
@@ -278,7 +278,7 @@ getLowestImmunity()
 bool:hasReservedSlotAccess(const String:playername[], userFlags) {
   
   // admin flag based 
-  if (userFlags & ADMFLAG_ROOT || userFlags & ADMFLAG_RESERVATION)
+  if (userFlags & ADMFLAG_BAN || userFlags & ADMFLAG_RESERVATION)
   {
     return true;
   } else {

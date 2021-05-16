@@ -18,8 +18,8 @@ float fBotFirePercentage;
 
 public OnPluginStart() 
 {
-	cvarBotAimPercentage = CreateConVar("ins_botaim", "1.0", "The amount of percentage bot will use aimbot at players. Bot will try to land headshot on every shot. Bot will trigger surpression. They will fire at players until they run out of ammo. When they reload, they will continue shooting at players. As long as they see just a bit of player model, it will trigger this aimbot.", FCVAR_PROTECTED, true, 0.0, true, 1.0);
-	cvarBotFirePercentage = CreateConVar("ins_botweaponfire", "1.0", "The amount of percentage bot will trigger weapon fire with the current weapon/grenade in their hand while looking at player. (This do not affect the botaim suppression.)", FCVAR_PROTECTED, true, 0.0, true, 1.0);
+	cvarBotAimPercentage = CreateConVar("ins_botaim", "0.01", "The amount of percentage bot will use aimbot at players. Bot will try to land headshot on every shot. Bot will trigger surpression. They will fire at players until they run out of ammo. When they reload, they will continue shooting at players. As long as they see just a bit of player model, it will trigger this aimbot.", FCVAR_PROTECTED, true, 0.0, true, 1.0);
+	cvarBotFirePercentage = CreateConVar("ins_botweaponfire", "0.1", "The amount of percentage bot will trigger weapon fire with the current weapon/grenade in their hand while looking at player. (This do not affect the botaim suppression.)", FCVAR_PROTECTED, true, 0.0, true, 1.0);
 	
 	cvarBotAimPercentage.AddChangeHook(OnCvarChange);
 	cvarBotFirePercentage.AddChangeHook(OnCvarChange);
@@ -47,7 +47,7 @@ public OnMapStart()
 
 public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:angles[3], &weapon, &nSubType, &nCmdNum, &nTickCount, &nSeed)  
 {
-	if(IsValidClient(client) && IsFakeClient(client) && IsPlayerAlive(client))
+	if(IsFakeClient(client) && IsPlayerAlive(client))
 	{
 		//Get where target view
 		int nTargetView = GetClientViewClient(client);
@@ -57,32 +57,41 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 		//Get RNG float
 		float fBotAimRandom = GetRandomFloat(0.0, 1.0);
 		float fBotFireRandom = GetRandomFloat(0.0, 1.0);
-		
+		//PrintToChatAll("fBotAimRandom %f, fBotFireRandom %f", fBotAimRandom, fBotFireRandom);
 		//Trigger aimbot base on percentage of float
-		if((fBotAimRandom <= fBotAimPercentage))
-		{
-			//Get the current weapon in hand
-			int nActiveWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			//Get the current weapon in hand ammo amount
-			int nClipAmmo = GetEntProp(nActiveWeapon, Prop_Send, "m_iClip1");
+		//if((fBotAimRandom < fBotAimPercentage))
+		//{
+		//	//Get the current weapon in hand
+		//	int nActiveWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		//	//Get the current weapon in hand ammo amount
+		//	int nClipAmmo = GetEntProp(nActiveWeapon, Prop_Send, "m_iClip1");
 			
-			//Get the closest target
-			int nTarget = GetClosestClient(client);
+		//	//Get the closest target
+		//	int nTarget = GetClosestClient(client);
 			
-			//If ammo is more than 0 and target is found
-			if((nClipAmmo > 0) && (nTarget > 0))
-			{
-				//Force bot to look at target
-				LookAtClient(client, nTarget);
-				//Trigger fire
-				buttons |= IN_ATTACK;
-				return Plugin_Changed;  
-			}
-		}
+		//	//If ammo is more than 0 and target is found
+		//	if((nClipAmmo > 0) && (nTarget > 0))
+		//	{
+		//		//Force bot to look at target
+		//		LookAtClient(client, nTarget);
+		//		//Trigger fire
+		//		buttons |= IN_ATTACK;
+		//		return Plugin_Changed;  
+		//	}
+		//}
+		//Get the current weapon in hand
+		int nActiveWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		//Get the current weapon in hand ammo amount
+		int nClipAmmo = GetEntProp(nActiveWeapon, Prop_Send, "m_iClip1");
+		
+		//Get the closest target
+		int nTarget = GetClosestClient(client);
 		
 		//Bot trigger fire if target is in bot crosshair
-		if((nTargetView == nTargetAim) && (GetClientTeam(client) != GetClientTeam(nTargetAim)) && (fBotFireRandom <= fBotFirePercentage))
+		if((nClipAmmo > 0) && (nTarget > 0) && (nTargetView == nTargetAim) && (GetClientTeam(client) != GetClientTeam(nTargetAim)) && (fBotFireRandom < fBotFirePercentage))
 		{
+			//Force bot to look at target
+			LookAtClient(client, nTarget);
 			//Trigger fire
 			buttons |= IN_ATTACK; 
 			return Plugin_Changed;  
@@ -96,6 +105,9 @@ stock void LookAtClient(int iClient, int iTarget)
 {
 	float fTargetPos[3]; float fTargetAngles[3]; float fClientPos[3]; float fFinalPos[3];
 	
+	//Calculate if bot gets near perfect shot.
+	float fBotPerfectShot = GetRandomFloat(0.0, 1.0);
+
 	//Get client eye position
 	GetClientEyePosition(iClient, fClientPos);
 	//Get target eye position
@@ -107,8 +119,13 @@ stock void LookAtClient(int iClient, int iTarget)
 	AddInFrontOf(fTargetPos, fTargetAngles, 0.0, fVecFinal);
 	MakeVectorFromPoints(fClientPos, fVecFinal, fFinalPos);
 	
+	float fbotOffsetX = GetRandomFloat(-20.0, 20.0);
+	float fbotOffsetY = GetRandomFloat(-20.0, 20.0);
+	float fbotOffsetZ = GetRandomFloat(-20.0, 20.0);
+	fFinalPos[0] = fFinalPos[0] + fbotOffsetX;
+	fFinalPos[1] = fFinalPos[1] + fbotOffsetY;
+	fFinalPos[2] = fFinalPos[2] + fbotOffsetZ;
 	GetVectorAngles(fFinalPos, fFinalPos);
-
 	//Teleport the entity to make them look at the target
 	TeleportEntity(iClient, NULL_VECTOR, fFinalPos, NULL_VECTOR);
 }

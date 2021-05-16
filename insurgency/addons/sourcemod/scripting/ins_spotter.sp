@@ -10,7 +10,7 @@ public Plugin:myinfo = {
 };
 
 new g_iPlayerEquipGear;
-int g_nSpotterID = 4;
+int g_nSpotterID = 29;
 new bool:g_nPlayerCanBeMark[MAXPLAYERS+1] = {true, ...};
 
 public OnPluginStart()
@@ -36,7 +36,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 				if(!nValue)
 				{
 					SetEntProp(nTargetAim, Prop_Send, "m_bGlowEnabled", true);
-					CreateTimer(8.0, Timer_RemoveGlowTarget, nTargetAim);
+					CreateTimer(3.0, Timer_RemoveGlowTarget, nTargetAim);
 				}
 			}
 		}

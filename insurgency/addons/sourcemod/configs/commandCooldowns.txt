@@ -1,0 +1,11 @@
+"CommandCooldowns"
+{
+	"calladmin"
+	{
+		"cooldown"			"15"
+		"reply"				"{default}You have to wait {green}{TIMELEFT}{default} seconds before using this command again!!!"
+        "clientcmd"			"say I'm a big dummy spammer!"
+        "plugin"        	"calladmin.smx"
+	}
+	
+}

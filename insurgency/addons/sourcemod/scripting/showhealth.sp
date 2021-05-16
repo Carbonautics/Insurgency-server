@@ -33,7 +33,7 @@ public OnPluginStart()
 	cvar_show_health = CreateConVar("sm_show_health", "1", "Enabled/Disabled show health functionality, 0 = off/1 = on", FCVAR_PLUGIN, true, 0.0, true, 1.0);
 	cvar_show_health_on_hit_only = CreateConVar("sm_show_health_on_hit_only", "0", "Defines the weather when to show a health text:\n0 = show your health on a screen based on delay time.\n1 = show your health only when somebody hit you", FCVAR_PLUGIN, true, 0.0, true, 1.0);
 	cvar_show_health_text_area = CreateConVar("sm_show_health_text_area", "1", "Defines the area for health text:\n 1 = in the hint text area\n 2 = in the center of the screen", FCVAR_PLUGIN, true, 1.0, true, 2.0);
-	cvar_show_health_display_delay = CreateConVar("sm_show_health_display_delay", "35", "Defines display delay time", FCVAR_PLUGIN);
+	cvar_show_health_display_delay = CreateConVar("sm_show_health_display_delay", "10", "Defines display delay time", FCVAR_PLUGIN);
 	
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Post);
@@ -49,6 +49,8 @@ public OnPluginStart()
 	
 	cookie_show_health = RegClientCookie("Show Health On/Off", "", CookieAccess_Private);
 	SetCookieMenuItem(CookieMenuHandler_ShowHealth, 1, "Show Health");
+	
+	AutoExecConfig(true,"plugin.showhealth");
 	
 	if(!g_bIsInit)
 	{

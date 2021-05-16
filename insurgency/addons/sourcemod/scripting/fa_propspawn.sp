@@ -218,7 +218,7 @@ public OnPluginStart()
 	RegAdminCmd("om_remove_prop", AdminRemovePropAim, ADMFLAG_SLAY, "Admin Prop Removal by aim");
 	//RegConsoleCmd(sPropCommand, PropCommand);
 
-	AutoExecConfig(true, "fa_propspawn");
+	AutoExecConfig(true, "sernix_prop_spawn");
 }
 
 // On map starts, call initalizing function
@@ -302,15 +302,11 @@ public ScaleBuildPoints() {
 	
 	if (nAvailableSupplyPoint <= 22)
 		nAvailableSupplyPoint = 22;
-	else if(nAvailableSupplyPoint > 30)
-		nAvailableSupplyPoint = 30;
 	//Credits 
 	if (tEngCount > 0)
 		iDefCredits = ((nAvailableSupplyPoint * 3) / tEngCount);
 	else
 		iDefCredits = (nAvailableSupplyPoint * 3);
-	if(iDefCredits > 60)
-		iDefCredits = 60;
 }
 
 public Action:Event_RoundEnd(Handle:event, const String:name[], bool:dontBroadcast)
@@ -379,7 +375,7 @@ public Action:Timer_MonitorAntennas(Handle:Timer)
 		new Float:propOrigin[3];
 		GetEntPropVector(validAntenna, Prop_Send, "m_vecOrigin", propOrigin);
 		propOrigin[2] += 50.0; 
-		TE_SetupBeamRingPoint(propOrigin, 1.0, JammerView_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 30, 8.0, 1.0, 0.0, {105, 205, 255, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
+		TE_SetupBeamRingPoint(propOrigin, 1.0, JammerView_Radius, g_iBeaconBeam, g_iBeaconHalo, 0, 30, 8.0, 1.5, 0.0, {102, 204, 255, 255}, 1, (FBEAM_FADEIN, FBEAM_FADEOUT));
 		//TE_SetupBeamRingPoint(fOrigin, 1.0, Healthkit_Radius*1.95, g_iBeaconBeam, g_iBeaconHalo, 0, 30, 5.0, 3.0, 0.0, {0, 200, 0, 255}, 1, (FBEAM_FADEOUT));
 		TE_SendToAll();
 		//TE_SetupBeamRingPoint(fOrigin, 10.0, Healthkit_Radius*1.95, g_iBeaconBeam, g_iBeaconHalo, 0, 30, 0.6, 3.0, 0.0, {0, 204, 102, 255}, 3, 0);

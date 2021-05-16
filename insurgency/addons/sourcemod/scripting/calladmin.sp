@@ -54,7 +54,7 @@ public void OnPluginStart()
 bool LoadConfig(char[] error, int maxlen)
 {
 	char[] sPath = new char[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, sPath, PLATFORM_MAX_PATH, "configs/calladmin.cfg");
+	BuildPath(Path_SM, sPath, PLATFORM_MAX_PATH, "configs/discord_s1.cfg");
 
 	Dynamic dConfigFile = Dynamic();
 

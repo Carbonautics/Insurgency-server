@@ -55,7 +55,7 @@ public Plugin:myinfo =
 public OnPluginStart() {
 	CreateConVar("sm_info_version", PLUGIN_VERSION, "Help menu version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	g_cvarWelcome = CreateConVar("sm_info_welcome", "1", "Show welcome message to newly connected users.", FCVAR_PLUGIN);
-	g_cvarAdmins = CreateConVar("sm_info_admins", "1", "Show a list of online admins in the menu.", FCVAR_PLUGIN);
+	g_cvarAdmins = CreateConVar("sm_info_admins", "0", "Show a list of online admins in the menu.", FCVAR_PLUGIN);
 	RegConsoleCmd("sm_info", Command_HelpMenu, "Display the help menu.", FCVAR_PLUGIN);
 
 	new String:hc[PLATFORM_MAX_PATH];
@@ -79,7 +79,8 @@ public OnClientPutInServer(client) {
 
 public Action:Timer_WelcomeMessage(Handle:timer, any:client) {
 	if (GetConVarBool(g_cvarWelcome) && IsClientConnected(client) && IsClientInGame(client) && !IsFakeClient(client))
-		PrintToChat(client, "\x01[SM] For help, type \x04!info\x01 in chat");
+		PrintToChat(client, "\x0759b0f9=F|A= \x01For Rules and Help, type \x04!info\x01 in chat");
+		PrintToChat(client, "\x01Use \x04!calladmin\x01 <reason> to Notify an admin on Discord. Check \x04!info\x01 before use.");
 }
 
 bool:ParseConfigFile(const String:file[]) {
