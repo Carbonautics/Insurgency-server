@@ -12,7 +12,7 @@
 
 ### Setup
 1. [Setup Dedicated server](https://steamcommunity.com/sharedfiles/filedetails/?id=345661185) with steamcmd. The files used in this tutorial such as server.cfg and the start batch script (to run the server) can be found inside [insurgency folder](https://github.com/Carbonautics/Insurgency-server/tree/master/insurgency).
-2. Download this repo. as a zip file. Extract copy and paste in your server's root(main) folder.
+2. Star and Fork and Download the repo. or just download this repo. as a zip file. Extract copy and paste in your server's root(main) folder.
 **_NOTE:** I suggest you take things slow and replace one file at a time only after understand what each file does and how your server reacts to changes in that file. This will save troubleshooting time in-case some files are not compatible with each other following some updates._
 3. Change the configs to your requirements and liking and enjoy. 
 4. You can deactive plugins by moving the corresponding files to '/disabled/' folder inside the [plugins folder](https://github.com/Carbonautics/Insurgency-server/tree/master/insurgency/addons/sourcemod/plugins) to not use some features that you do not like.
